@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 //import org.springframework.web.bind.annotation.RestController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 public class MyController {
@@ -11,7 +13,11 @@ public class MyController {
     @GetMapping("/")
     @ResponseBody
     public String home() {
-        return "<html><body><h1>Hello, World!</h1></body></html>";
+    	LocalDateTime currentTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String formattedTime = currentTime.format(formatter);
+
+        return "<html><body><h1>Hello, World! Current time is: " + formattedTime + "</h1></body></html>";
     }
     
     @GetMapping("/one")
